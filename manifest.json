@@ -1,10 +1,10 @@
 {
-    "name": "Cierre de Turno",
-    "short_name": "CierreTurno",
+    "name": "Cierre de Turno - Servi",
+    "short_name": "CierreServi",
     "description": "Liquidacion para chofer y titular de remis/taxi",
     "start_url": "/",
     "display": "standalone",
-    "theme_color": "#f39c12",
+    "theme_color": "#0066B3",
     "background_color": "#ffffff",
     "orientation": "portrait",
     "icons": [
