@@ -3,6 +3,7 @@
 /* ============================================= */
 
 function formatearPesos(valor) {
+    if (valor === 0 || valor === null || valor === undefined || valor === '') return '';
     return '$ ' + valor.toLocaleString('es-AR', { 
         minimumFractionDigits: 0, 
         maximumFractionDigits: 0 
