@@ -25,7 +25,7 @@ function actualizarPantalla() {
     detalle.detSubtotal2.textContent = formatearPesos(r.base50 + r.frecuencia);
     detalle.detTarjeta.textContent = formatearPesos(r.tarjetaQr);
     detalle.detVoucher.textContent = formatearPesos(r.voucher);
-    detalle.detToken.textContent = formatearPesos(r.token);
+    detalle.detToken.textContent = formatearPesos(r.firmaTicket);
     detalle.detCtaCte.textContent = formatearPesos(r.cuentaCorriente);
     detalle.detGastos.textContent = formatearPesos(r.gastos);
     detalle.detTotalTitular.textContent = formatearPesos(r.totalTitular);
@@ -36,7 +36,7 @@ function actualizarPantalla() {
     detalle.detTotalChofer.textContent = formatearPesos(r.totalChofer);
     
     // Mostrar operacion completa
-    detalle.detOperacion.innerHTML = `TITULAR: ${formatearPesos(r.recaudacion)} - ${formatearPesos(r.combustible)} = ${formatearPesos(r.despuesCombustible)} / 2 = ${formatearPesos(r.base50)} + ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.base50 + r.frecuencia)} - (${formatearPesos(r.tarjetaQr)} + ${formatearPesos(r.voucher)} + ${formatearPesos(r.token)} + ${formatearPesos(r.cuentaCorriente)} + ${formatearPesos(r.gastos)}) = ${formatearPesos(r.totalTitular)}<br><br>CHOFER: ${formatearPesos(r.base50)} - ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.totalChofer)}`;
+    detalle.detOperacion.innerHTML = `TITULAR: ${formatearPesos(r.recaudacion)} - ${formatearPesos(r.combustible)} = ${formatearPesos(r.despuesCombustible)} / 2 = ${formatearPesos(r.base50)} + ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.base50 + r.frecuencia)} - (${formatearPesos(r.tarjetaQr)} + ${formatearPesos(r.voucher)} + ${formatearPesos(r.firmaTicket)} + ${formatearPesos(r.cuentaCorriente)} + ${formatearPesos(r.gastos)}) = ${formatearPesos(r.totalTitular)}<br><br>CHOFER: ${formatearPesos(r.base50)} - ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.totalChofer)}`;
 }
 
 // Navegacion con Enter (PC)
