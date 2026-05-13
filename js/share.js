@@ -18,7 +18,7 @@ Combustible: ${formatearPesos(r.combustible)}
 Frecuencia: ${formatearPesos(r.frecuencia)}
 Tarjeta/QR: ${formatearPesos(r.tarjetaQr)}
 Voucher: ${formatearPesos(r.voucher)}
-Token: ${formatearPesos(r.token)}
+Ticket: ${formatearPesos(r.firmaTicket)}
 Cuenta Corriente: ${formatearPesos(r.cuentaCorriente)}
 Gastos: ${formatearPesos(r.gastos)}
 
