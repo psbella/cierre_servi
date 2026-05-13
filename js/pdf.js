@@ -59,7 +59,7 @@ function exportarPDF() {
     pdf.text(`Tarjeta / QR: ${formatearPesos(r.tarjetaQr)}`, 120, y);
     y += 6;
     pdf.text(`Voucher: ${formatearPesos(r.voucher)}`, 20, y);
-    pdf.text(`Token: ${formatearPesos(r.token)}`, 120, y);
+    pdf.text(`Token: ${formatearPesos(r.firmaTicket)}`, 120, y);
     y += 6;
     pdf.text(`Cuenta Corriente: ${formatearPesos(r.cuentaCorriente)}`, 20, y);
     pdf.text(`Gastos: ${formatearPesos(r.gastos)}`, 120, y);
@@ -114,7 +114,7 @@ function exportarPDF() {
     y += 5;
     pdf.text(`Voucher: - ${formatearPesos(r.voucher)}`, 20, y);
     y += 5;
-    pdf.text(`Token: - ${formatearPesos(r.token)}`, 20, y);
+    pdf.text(`Token: - ${formatearPesos(r.firmaTicket)}`, 20, y);
     y += 5;
     pdf.text(`Cuenta Corriente: - ${formatearPesos(r.cuentaCorriente)}`, 20, y);
     y += 5;
@@ -156,7 +156,7 @@ function exportarPDF() {
     pdf.setTextColor(100, 100, 100);
     pdf.text('Formula aplicada: (Recaudacion - Combustible) / 2 = Base 50%', 20, y);
     y += 4;
-    pdf.text('Titular = Base + Frecuencia - (Tarjeta/QR + Voucher + Token + Cta Cte + Gastos)', 20, y);
+    pdf.text('Titular = Base + Frecuencia - (Tarjeta/QR + Voucher + Ticket + Cta Cte + Gastos)', 20, y);
     y += 4;
     pdf.text('Chofer = Base - Frecuencia', 20, y);
     
