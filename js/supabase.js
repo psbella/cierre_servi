@@ -103,19 +103,3 @@ async function cargarHistorialDesdeSupabase() {
     const { data, error } = await query.order('fecha', { ascending: false });
     return { data, error };
 }
-
-// RECUPERAR CONTRASEÑA
-async function recuperarContrasenia(email) {
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + '/update-password.html'
-    });
-    return { data, error };
-}
-
-// ACTUALIZAR CONTRASEÑA
-async function actualizarContrasenia(nuevaPassword) {
-    const { data, error } = await supabase.auth.updateUser({
-        password: nuevaPassword
-    });
-    return { data, error };
-}
