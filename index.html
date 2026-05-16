@@ -61,55 +61,78 @@
             </div>
 
             <!-- MOVIMIENTOS DEL TURNO -->
-            <div class="seccion">
-                <h3>MOVIMIENTOS DEL TURNO</h3>
+<div class="seccion">
+    <h3>MOVIMIENTOS DEL TURNO</h3>
 
-                <div class="fila-2">
-                    <div class="campo">
-                        <label for="viajes">Cantidad de viajes</label>
-                        <input type="text" id="viajes" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Cantidad de viajes">
-                    </div>
-                    <div class="campo">
-                        <label for="kilometros">Kilometros recorridos</label>
-                        <input type="text" id="kilometros" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Kilómetros recorridos">
-                    </div>
-                </div>
-
-                <div class="campo">
-                    <label for="recaudacion">Recaudacion</label>
-                    <input type="text" id="recaudacion" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Recaudación en pesos">
-                </div>
-
-                <div class="campo">
-                    <label for="combustible">Combustible</label>
-                    <input type="text" id="combustible" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Gasto en combustible">
-                </div>
-
-                <div class="fila-2">
-                    <div class="campo">
-                        <label for="frecuencia">Frecuencia</label>
-                        <input type="text" id="frecuencia" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Frecuencia">
-                    </div>
-                    <div class="campo">
-                        <label for="tarjeta_qr">Tarjeta / QR</label>
-                        <input type="text" id="tarjeta_qr" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Pagos con tarjeta o QR">
-                    </div>
-                </div>
-
-                <div class="fila-2">
+    <!-- NUEVOS CAMPOS -->
     <div class="campo">
-        <label for="voucher">Voucher</label>
-        <input type="text" id="voucher" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Pagos con voucher">
+        <label for="totalReloj">Total Reloj</label>
+        <input type="text" id="totalReloj" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Total del reloj">
     </div>
-    <div class="campo">
-    <label for="firmaTicket">Firma Ticket</label>
-    <input type="text" id="firmaTicket" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Firma Ticket del cliente">
-</div>
-</div>
 
-                <div class="fila-2">
-                    <div class="campo">
-                        <label for="cuenta_corriente">Cuenta Corriente</label>
+    <div class="campo">
+        <label for="relevo">Relevo</label>
+        <input type="text" id="relevo" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Monto por relevo">
+    </div>
+
+    <!-- El resto de los campos siguen igual -->
+    <div class="fila-2">
+        <div class="campo">
+            <label for="viajes">Cantidad de viajes</label>
+            <input type="text" id="viajes" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Cantidad de viajes">
+        </div>
+        <div class="campo">
+            <label for="kilometros">Kilometros recorridos</label>
+            <input type="text" id="kilometros" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Kilómetros recorridos">
+        </div>
+    </div>
+
+    <div class="campo">
+        <label for="combustible">Combustible</label>
+        <div style="display: flex; gap: 8px;">
+            <input type="text" id="combustible" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Gasto en combustible" style="flex: 1;">
+            <button type="button" id="btnAgregarCombustible" style="width: 40px; background: #0066B3; color: white; border: none; border-radius: 8px; font-size: 1.2rem; cursor: pointer;">+</button>
+        </div>
+    </div>
+
+    <div class="fila-2">
+        <div class="campo">
+            <label for="frecuencia">Frecuencia</label>
+            <input type="text" id="frecuencia" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Frecuencia">
+        </div>
+        <div class="campo">
+            <label for="tarjeta_qr">Tarjeta / QR</label>
+            <input type="text" id="tarjeta_qr" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Pagos con tarjeta o QR">
+        </div>
+    </div>
+
+    <div class="fila-2">
+        <div class="campo">
+            <label for="voucher">Voucher</label>
+            <input type="text" id="voucher" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Pagos con voucher">
+        </div>
+        <div class="campo">
+            <label for="firmaTicket">Firma Ticket</label>
+            <input type="text" id="firmaTicket" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Firma Ticket del cliente">
+        </div>
+    </div>
+
+    <div class="fila-2">
+        <div class="campo">
+            <label for="cuenta_corriente">Cuenta Corriente</label>
+            <input type="text" id="cuenta_corriente" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Pagos a cuenta corriente">
+        </div>
+        <div class="campo">
+            <label for="gastos">Gastos</label>
+            <input type="text" id="gastos" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Otros gastos">
+        </div>
+    </div>
+
+    <div class="campo">
+        <label for="notas">Notas u observaciones</label>
+        <textarea id="notas" placeholder="" aria-label="Notas u observaciones"></textarea>
+    </div>
+</div>
                         <input type="text" id="cuenta_corriente" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Pagos a cuenta corriente">
                     </div>
                     <div class="campo">
