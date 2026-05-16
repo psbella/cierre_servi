@@ -1,39 +1,129 @@
-/* ============================================= */
-/* LOGICA PRINCIPAL - SERVI v2                   */
-/* ============================================= */
+// =============================================
+// BOTONES Y MODALES (CON VERIFICACIONES)
+// =============================================
+
+const btnLoginHeader = document.getElementById('btnLoginHeader');
+const loginModal = document.getElementById('loginModal');
+const registerModal = document.getElementById('registerModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const closeRegisterModalBtn = document.getElementById('closeRegisterModalBtn');
+const showRegisterLink = document.getElementById('showRegisterLink');
+
+// Verificar que los elementos existen
+console.log('btnLoginHeader:', btnLoginHeader);
+console.log('loginModal:', loginModal);
+console.log('registerModal:', registerModal);
+
+if (btnLoginHeader) {
+    btnLoginHeader.onclick = () => {
+        console.log('Click en login');
+        if (loginModal) loginModal.style.display = 'flex';
+        else alert('Error: loginModal no encontrado');
+    };
+} else {
+    console.error('No se encontró el botón btnLoginHeader');
+}
+
+if (closeModalBtn) {
+    closeModalBtn.onclick = () => {
+        if (loginModal) loginModal.style.display = 'none';
+    };
+}
+
+if (closeRegisterModalBtn) {
+    closeRegisterModalBtn.onclick = () => {
+        if (registerModal) registerModal.style.display = 'none';
+    };
+}
+
+if (showRegisterLink) {
+    showRegisterLink.onclick = (e) => {
+        e.preventDefault();
+        if (loginModal) loginModal.style.display = 'none';
+        if (registerModal) registerModal.style.display = 'flex';
+    };
+}
+
+// Botón de login dentro del modal
+const btnLoginModal = document.getElementById('btnLoginModal');
+if (btnLoginModal) {
+    btnLoginModal.onclick = async () => {
+        const email = document.getElementById('loginEmail')?.value;
+        const password = document.getElementById('loginPassword')?.value;
+        if (!email || !password) {
+            alert('Completá email y contraseña');
+            return;
+        }
+        const { error } = await loginUsuario(email, password);
+        if (error) alert('Error: ' + error.message);
+        else location.reload();
+    };
+}
+
+// Botón de registro dentro del modal
+const btnRegisterModal = document.getElementById('btnRegisterModal');
+if (btnRegisterModal) {
+    btnRegisterModal.onclick = async () => {
+        const nombre = document.getElementById('regNombre')?.value;
+        const email = document.getElementById('regEmail')?.value;
+        const password = document.getElementById('regPassword')?.value;
+        const legajo = document.getElementById('regLegajo')?.value;
+        if (!nombre || !email || !password || !legajo) {
+            alert('Completá todos los campos');
+            return;
+        }
+        const { error } = await registrarUsuario(email, password, nombre, legajo);
+        if (error) alert('Error: ' + error.message);
+        else {
+            alert('Usuario registrado. Revisá tu email para confirmar.');
+            registerModal.style.display = 'none';
+        }
+    };
+}
+
+// Cerrar sesión
+const btnLogoutHeader = document.getElementById('btnLogoutHeader');
+if (btnLogoutHeader) {
+    btnLogoutHeader.onclick = async () => {
+        await logoutUsuario();
+        location.reload();
+    };
+}
 
 // Verificar sesión al cargar
 async function verificarSesion() {
-    const { user } = await obtenerUsuarioActual();
+    const { data: { user } } = await supabase.auth.getUser();
+    const btnLogin = document.getElementById('btnLoginHeader');
+    const userInfo = document.getElementById('userLoggedInfo');
+    const userNameSpan = document.getElementById('userNameDisplay');
+    const userLegajoSpan = document.getElementById('userLegajoDisplay');
+    
     if (user) {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('appScreen').style.display = 'block';
+        usuarioActual = user;
         const { perfil } = await obtenerPerfil(user.id);
-        if (perfil) {
-            document.getElementById('userName').textContent = perfil.nombre;
-            document.getElementById('userLegajo').textContent = `Legajo: ${perfil.legajo}`;
+        if (btnLogin) btnLogin.style.display = 'none';
+        if (userInfo) userInfo.style.display = 'block';
+        if (userNameSpan) userNameSpan.textContent = perfil?.nombre || user.email;
+        if (userLegajoSpan) userLegajoSpan.textContent = `Legajo: ${perfil?.legajo || 'N/A'}`;
+        
+        const { data } = await cargarHistorialDesdeSupabase();
+        if (data?.length) mostrarHistorial(data);
+        else {
+            const container = document.getElementById('historialContainer');
+            if (container) container.innerHTML = '<p>No hay turnos guardados</p>';
         }
-        cargarHistorialDesdeSupabase().then(({ data }) => {
-            if (data) mostrarHistorial(data);
-        });
-    } else {
-        document.getElementById('loginScreen').style.display = 'block';
-        document.getElementById('appScreen').style.display = 'none';
     }
 }
 
-// Mostrar historial
 function mostrarHistorial(turnos) {
     const container = document.getElementById('historialContainer');
     if (!container) return;
-    
-    if (!turnos || turnos.length === 0) {
+    if (!turnos?.length) {
         container.innerHTML = '<p>No hay turnos guardados</p>';
         return;
     }
-    
     container.innerHTML = turnos.map(t => `
-        <div class="historial-item">
+        <div style="padding: 8px; border-bottom: 1px solid #ddd;">
             <strong>${t.fecha}</strong><br>
             Total Reloj: $${t.total_reloj?.toLocaleString() || 0}<br>
             Titular: $${t.total_titular?.toLocaleString() || 0}<br>
@@ -42,174 +132,5 @@ function mostrarHistorial(turnos) {
     `).join('');
 }
 
-// Limpiar campo fecha al cargar
-const fechaInput = document.getElementById('fecha');
-if (fechaInput) fechaInput.value = '';
-
-// Elementos del DOM para combustible dinámico
-const combustiblePrincipal = document.getElementById('combustiblePrincipal');
-const containerCombustible = document.getElementById('combustibleContainer');
-const totalCombustibleDiv = document.getElementById('totalCombustible');
-
-// Array para guardar los inputs extras
-let inputsCombustible = [];
-
-// Función para calcular el total de combustible
-function calcularTotalCombustible() {
-    let total = parseFloat(combustiblePrincipal?.value) || 0;
-    inputsCombustible.forEach(input => {
-        total += parseFloat(input.value) || 0;
-    });
-    if (totalCombustibleDiv) {
-        totalCombustibleDiv.innerHTML = `<strong>Total combustible: $${total.toLocaleString('es-AR')}</strong>`;
-    }
-    
-    // Disparar evento para actualizar cálculos
-    if (combustiblePrincipal) {
-        combustiblePrincipal.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-}
-
-// Función para crear un nuevo campo de combustible
-function agregarCampoCombustible() {
-    const index = inputsCombustible.length;
-    const div = document.createElement('div');
-    div.style.display = 'flex';
-    div.style.gap = '8px';
-    div.style.marginBottom = '8px';
-    div.style.alignItems = 'center';
-    
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.placeholder = `Carga ${index + 1}`;
-    input.inputMode = 'numeric';
-    input.pattern = '[0-9]*';
-    input.ariaLabel = `Carga de combustible ${index + 1}`;
-    input.style.flex = '1';
-    input.style.padding = '8px 12px';
-    input.style.border = '1px solid #ccc';
-    input.style.borderRadius = '8px';
-    
-    const btnEliminar = document.createElement('button');
-    btnEliminar.textContent = '✕';
-    btnEliminar.style.width = '32px';
-    btnEliminar.style.background = '#e74c3c';
-    btnEliminar.style.color = 'white';
-    btnEliminar.style.border = 'none';
-    btnEliminar.style.borderRadius = '8px';
-    btnEliminar.style.cursor = 'pointer';
-    
-    btnEliminar.addEventListener('click', () => {
-        div.remove();
-        const pos = inputsCombustible.indexOf(input);
-        if (pos !== -1) inputsCombustible.splice(pos, 1);
-        calcularTotalCombustible();
-        // Reordenar placeholders
-        inputsCombustible.forEach((inp, i) => {
-            inp.placeholder = `Carga ${i + 1}`;
-        });
-    });
-    
-    input.addEventListener('input', () => {
-        calcularTotalCombustible();
-    });
-    
-    div.appendChild(input);
-    div.appendChild(btnEliminar);
-    if (containerCombustible) containerCombustible.appendChild(div);
-    inputsCombustible.push(input);
-    
-    calcularTotalCombustible();
-}
-
-// Botón para agregar campo
-const btnAgregar = document.getElementById('btnAgregarCombustible');
-if (btnAgregar) {
-    btnAgregar.addEventListener('click', () => {
-        agregarCampoCombustible();
-    });
-}
-
-// Escuchar cambios en el campo principal
-if (combustiblePrincipal) {
-    combustiblePrincipal.addEventListener('input', () => {
-        calcularTotalCombustible();
-    });
-}
-
-function actualizarPantalla() {
-    const r = calcularTodo();
-    const elementos = obtenerElementosDOM();
-    const detalle = obtenerElementosDetalle();
-    
-    // Actualizar resultados principales
-    if (elementos.totalTitular) elementos.totalTitular.textContent = formatearPesos(r.totalTitular);
-    if (elementos.totalChofer) elementos.totalChofer.textContent = formatearPesos(r.totalChofer);
-    if (elementos.promedioViaje) elementos.promedioViaje.textContent = formatearPesos(r.promedioViaje);
-    if (elementos.promedioKm) elementos.promedioKm.textContent = formatearPesos(r.promedioKm);
-    
-    // Actualizar detalle TITULAR
-    if (detalle.detTotal) detalle.detTotal.textContent = formatearPesos(r.totalRecaudacion);
-    if (detalle.detCombustible) detalle.detCombustible.textContent = formatearPesos(r.combustible);
-    if (detalle.detSubtotal1) detalle.detSubtotal1.textContent = formatearPesos(r.subtotal);
-    if (detalle.det50) detalle.det50.textContent = formatearPesos(r.base50);
-    if (detalle.detFrecuencia) detalle.detFrecuencia.textContent = formatearPesos(r.frecuencia);
-    if (detalle.detSubtotal2) detalle.detSubtotal2.textContent = formatearPesos(r.subTotal);
-    if (detalle.detTarjeta) detalle.detTarjeta.textContent = formatearPesos(r.tarjetaQr);
-    if (detalle.detVoucher) detalle.detVoucher.textContent = formatearPesos(r.voucher);
-    if (detalle.detToken) detalle.detToken.textContent = formatearPesos(r.firmaTicket);
-    if (detalle.detCtaCte) detalle.detCtaCte.textContent = formatearPesos(r.cuentaCorriente);
-    if (detalle.detGastos) detalle.detGastos.textContent = formatearPesos(r.gastos);
-    if (detalle.detTotalTitular) detalle.detTotalTitular.textContent = formatearPesos(r.totalTitular);
-    
-    // Actualizar detalle CHOFER
-    if (detalle.detChoferBase) detalle.detChoferBase.textContent = formatearPesos(r.base50);
-    if (detalle.detChoferFrecuencia) detalle.detChoferFrecuencia.textContent = formatearPesos(r.frecuencia);
-    if (detalle.detTotalChofer) detalle.detTotalChofer.textContent = formatearPesos(r.totalChofer);
-    
-    // Mostrar operacion completa
-    if (detalle.detOperacion) {
-        detalle.detOperacion.innerHTML = `TITULAR: Total Reloj ${formatearPesos(r.totalReloj)} - Relevo ${formatearPesos(r.relevo)} = ${formatearPesos(r.totalRecaudacion)} - Combustible ${formatearPesos(r.combustible)} = ${formatearPesos(r.subtotal)} / 2 = ${formatearPesos(r.base50)} + Frecuencia ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.subTotal)} - (Tarjeta/QR ${formatearPesos(r.tarjetaQr)} + Voucher ${formatearPesos(r.voucher)} + Firma Ticket ${formatearPesos(r.firmaTicket)} + Cta Cte ${formatearPesos(r.cuentaCorriente)} + Gastos ${formatearPesos(r.gastos)}) = ${formatearPesos(r.totalTitular)}<br><br>CHOFER: ${formatearPesos(r.base50)} - Frecuencia ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.totalChofer)}`;
-    }
-}
-
-// Navegacion con Enter (PC)
-function setupEnterNavigation() {
-    const campos = document.querySelectorAll('input, textarea');
-    campos.forEach((campo, index) => {
-        campo.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const siguienteCampo = campos[index + 1];
-                if (siguienteCampo) {
-                    siguienteCampo.focus();
-                    siguienteCampo.select();
-                }
-            }
-        });
-    });
-}
-
-// Eventos de los botones
-const btnPDF = document.getElementById('exportarPDF');
-const btnWhatsapp = document.getElementById('enviarWhatsapp');
-const btnEmail = document.getElementById('enviarEmail');
-
-if (btnPDF) btnPDF.addEventListener('click', exportarPDF);
-if (btnWhatsapp) btnWhatsapp.addEventListener('click', enviarWhatsapp);
-if (btnEmail) btnEmail.addEventListener('click', enviarEmail);
-
-// Activar navegacion con Enter
-setupEnterNavigation();
-
-// Actualizar al escribir en cualquier campo
-const todosLosCampos = document.querySelectorAll('input, textarea');
-todosLosCampos.forEach(campo => {
-    campo.addEventListener('input', actualizarPantalla);
-});
-
-// Inicializar lista de combustible
-calcularTotalCombustible();
-
 // Inicializar
-actualizarPantalla();
+verificarSesion();
