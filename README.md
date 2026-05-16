@@ -87,7 +87,7 @@ Aplicación web para liquidación de cierre de turno de remises/taxis. Calcula a
 | Versión | Tipo | Enlace |
 |---------|------|--------|
 | v1.0.0 | Monolítica (un solo archivo) | Enlace no disponible |
-| v1.1.0 | Modular (archivos separados) | [https://psbella.github.io/cierre_remis/](https://psbella.github.io/cierre_remis/) |
+| v1.1.0 | Modular (archivos separados) | [https://psbella.github.io/cierre_servi/](https://psbella.github.io/cierre_servi/) |
 
 ## 📱 Características
 
