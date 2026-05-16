@@ -2,6 +2,25 @@
 /* LOGICA DE CALCULO - SERVI v2                  */
 /* ============================================= */
 
+// Función auxiliar para obtener el total de combustible (suma de todos los campos)
+function obtenerTotalCombustible() {
+    let total = 0;
+    
+    // Campo principal
+    const principal = document.getElementById('combustiblePrincipal');
+    if (principal) {
+        total += parseFloat(principal.value) || 0;
+    }
+    
+    // Campos dinámicos
+    const inputs = document.querySelectorAll('#combustibleContainer input[type="text"]');
+    inputs.forEach(input => {
+        total += parseFloat(input.value) || 0;
+    });
+    
+    return total;
+}
+
 function obtenerDatos() {
     // Obtener fecha actual por defecto si el campo está vacío
     const fechaInput = document.getElementById('fecha');
@@ -17,7 +36,7 @@ function obtenerDatos() {
         kilometros: parseFloat(document.getElementById('kilometros')?.value) || 0,
         totalReloj: parseFloat(document.getElementById('totalReloj')?.value) || 0,
         relevo: parseFloat(document.getElementById('relevo')?.value) || 0,
-        combustible: parseFloat(document.getElementById('combustible')?.value) || 0,
+        combustible: obtenerTotalCombustible(),
         frecuencia: parseFloat(document.getElementById('frecuencia')?.value) || 0,
         tarjetaQr: parseFloat(document.getElementById('tarjeta_qr')?.value) || 0,
         voucher: parseFloat(document.getElementById('voucher')?.value) || 0,
