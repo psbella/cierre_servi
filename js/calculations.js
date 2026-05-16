@@ -1,5 +1,5 @@
 /* ============================================= */
-/* LOGICA DE CALCULO                             */
+/* LOGICA DE CALCULO - SERVI v2                  */
 /* ============================================= */
 
 function obtenerDatos() {
@@ -15,7 +15,8 @@ function obtenerDatos() {
         chofer: document.getElementById('choferNombre')?.value || '',
         viajes: parseFloat(document.getElementById('viajes')?.value) || 0,
         kilometros: parseFloat(document.getElementById('kilometros')?.value) || 0,
-        recaudacion: parseFloat(document.getElementById('recaudacion')?.value) || 0,
+        totalReloj: parseFloat(document.getElementById('totalReloj')?.value) || 0,
+        relevo: parseFloat(document.getElementById('relevo')?.value) || 0,
         combustible: parseFloat(document.getElementById('combustible')?.value) || 0,
         frecuencia: parseFloat(document.getElementById('frecuencia')?.value) || 0,
         tarjetaQr: parseFloat(document.getElementById('tarjeta_qr')?.value) || 0,
@@ -30,35 +31,43 @@ function obtenerDatos() {
 function calcularTodo() {
     const d = obtenerDatos();
     
-    // Paso 1: Recaudacion - Combustible
-    const despuesCombustible = d.recaudacion - d.combustible;
+    // Total Reloj - Relevo = Total recaudación
+    const totalRecaudacion = d.totalReloj - d.relevo;
     
-    // Paso 2: Base 50%
-    const base50 = despuesCombustible / 2;
+    // Total recaudación - Combustible = Subtotal
+    const subtotal = totalRecaudacion - d.combustible;
     
-    // Paso 3: Descuentos que afectan solo al TITULAR
-    const descuentosTitular = d.tarjetaQr + d.voucher + d.firmaTicket + d.cuentaCorriente + d.gastos;
+    // Subtotal / 2 = Base 50%
+    const base50 = subtotal / 2;
     
-    // Paso 4: TOTAL TITULAR
-    const totalTitular = base50 + d.frecuencia - descuentosTitular;
+    // Base 50% + Frecuencia = Sub total
+    const subTotal = base50 + d.frecuencia;
     
-    // Paso 5: TOTAL CHOFER
+    // Descuentos del titular
+    const descuentos = d.tarjetaQr + d.voucher + d.firmaTicket + d.cuentaCorriente + d.gastos;
+    
+    // TOTAL TITULAR
+    const totalTitular = subTotal - descuentos;
+    
+    // TOTAL CHOFER
     const totalChofer = base50 - d.frecuencia;
     
-    // Promedios
+    // Promedios (usando totalRecaudacion como base)
     let promedioViaje = 0;
     let promedioKm = 0;
-    if (d.viajes > 0) promedioViaje = d.recaudacion / d.viajes;
-    if (d.kilometros > 0) promedioKm = d.recaudacion / d.kilometros;
+    if (d.viajes > 0) promedioViaje = totalRecaudacion / d.viajes;
+    if (d.kilometros > 0) promedioKm = totalRecaudacion / d.kilometros;
     
     return {
         totalTitular,
         totalChofer,
         promedioViaje,
         promedioKm,
+        totalRecaudacion,
+        subtotal,
         base50,
-        despuesCombustible,
-        descuentosTitular,
+        subTotal,
+        descuentos,
         ...d
     };
 }
