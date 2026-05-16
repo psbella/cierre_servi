@@ -85,14 +85,15 @@
                     </div>
                 </div>
 
+                <!-- Combustible con campos dinámicos -->
                 <div class="campo">
-                    <label for="combustible">Combustible</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="text" id="combustible" placeholder="" inputmode="numeric" pattern="[0-9]*" aria-label="Gasto en combustible" style="flex: 1;">
+                    <label>Combustible</label>
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <input type="text" id="combustiblePrincipal" placeholder="Monto" inputmode="numeric" pattern="[0-9]*" aria-label="Gasto en combustible" style="flex: 1;">
                         <button type="button" id="btnAgregarCombustible" style="width: 40px; background: #0066B3; color: white; border: none; border-radius: 8px; font-size: 1.2rem; cursor: pointer;">+</button>
                     </div>
-                    <div id="listaCargasCombustible" style="margin-top: 8px; font-size: 0.8rem; color: #555;"></div>
-                    <div id="totalCombustible" style="margin-top: 4px; font-size: 0.9rem; font-weight: bold; color: #0066B3;"></div>
+                    <div id="combustibleContainer" style="margin-top: 8px;"></div>
+                    <div id="totalCombustible" style="margin-top: 8px; font-size: 0.9rem; font-weight: bold; color: #0066B3;"></div>
                 </div>
 
                 <div class="fila-2">
@@ -299,4 +300,4 @@
     <script src="js/main.js"></script>
 
 </body>
-    </html>
+</html>
