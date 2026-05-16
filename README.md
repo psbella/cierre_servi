@@ -1,26 +1,42 @@
 # 🚖 Cierre de Turno
 
+
 <!-- ESTADO Y METADATOS -->
-[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://psbella.github.io/cierre_remis/)
-[![stable](https://img.shields.io/badge/stable-✓-brightgreen)](https://github.com/psbella/cierre_remis)
-[![Maintenance](https://img.shields.io/badge/Maintenance-Actively%20Maintained-brightgreen)](https://github.com/psbella/cierre_remis)
-[![GitHub Pages](https://img.shields.io/badge/Hosting-GitHub%20Pages-blue)](https://psbella.github.io/cierre_remis/)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://psbella.github.io/cierre_servi/)
+[![stable](https://img.shields.io/badge/stable-✓-brightgreen)](https://github.com/psbella/cierre_servi)
+[![Maintenance](https://img.shields.io/badge/Maintenance-Actively%20Maintained-brightgreen)](https://github.com/psbella/cierre_servi)
+[![GitHub Pages](https://img.shields.io/badge/Hosting-GitHub%20Pages-blue)](https://psbella.github.io/cierre_servi/)
 [![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
-[![Repo Size](https://img.shields.io/github/repo-size/psbella/cierre_remis)](https://github.com/psbella/cierre_remis)
-[![Last Commit](https://img.shields.io/github/last-commit/psbella/cierre_remis)](https://github.com/psbella/cierre_remis/commits/main)
-[![Open Issues](https://img.shields.io/github/issues/psbella/cierre_remis?label=Open%20Issues)](https://github.com/psbella/cierre_remis/issues)
+[![Repo Size](https://img.shields.io/github/repo-size/psbella/cierre_servi)](https://github.com/psbella/cierre_servi)
+[![Last Commit](https://img.shields.io/github/last-commit/psbella/cierre_servi)](https://github.com/psbella/cierre_servi/commits/main)
+[![Open Issues](https://img.shields.io/github/issues/psbella/cierre_servi?label=Open%20Issues)](https://github.com/psbella/cierre_servi/issues)
 
 <!-- CALIDAD Y BUENAS PRÁCTICAS -->
-[![Dependencies](https://img.shields.io/badge/dependencies-1%20(jsPDF)-brightgreen)](https://github.com/psbella/cierre_remis)
+[![Dependencies](https://img.shields.io/badge/dependencies-1%20(jsPDF)-brightgreen)](https://github.com/psbella/cierre_servi)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)](https://opensource.org/)
-[![No Ads](https://img.shields.io/badge/No%20Ads-✅-brightgreen)](https://psbella.github.io/cierre_remis/)
-[![No Tracking](https://img.shields.io/badge/No%20Tracking-✅-brightgreen)](https://psbella.github.io/cierre_remis/)
-[![GDPR](https://img.shields.io/badge/GDPR-Compliant-brightgreen)](https://psbella.github.io/cierre_remis/)
+[![No Ads](https://img.shields.io/badge/No%20Ads-✅-brightgreen)](https://psbella.github.io/cierre_servi/)
+[![No Tracking](https://img.shields.io/badge/No%20Tracking-✅-brightgreen)](https://psbella.github.io/cierre_servi/)
+[![GDPR](https://img.shields.io/badge/GDPR-Compliant-brightgreen)](https://psbella.github.io/cierre_servi/)
 
 <!-- PWA Y OFFLINE -->
 [![PWA](https://img.shields.io/badge/PWA-Enabled-5a0fc8)](https://web.dev/progressive-web-apps/)
 [![Offline](https://img.shields.io/badge/Offline-First-brightgreen)](https://web.dev/offline-fallback-page/)
 [![Service Worker](https://img.shields.io/badge/Service%20Worker-✅-blue)](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API)
+
+<!-- BACKEND Y BASE DE DATOS -->
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Row Level Security](https://img.shields.io/badge/Row%20Level%20Security-Enabled-brightgreen)](https://supabase.com/docs/guides/auth/row-level-security)
+
+<!-- AUTENTICACIÓN -->
+[![Authentication](https://img.shields.io/badge/Authentication-Email%2FPassword-blue)](https://supabase.com/docs/guides/auth)
+[![User Management](https://img.shields.io/badge/User%20Management-Supabase-blue)](https://supabase.com/)
+[![Password Recovery](https://img.shields.io/badge/Password%20Recovery-✅-brightgreen)]()
+
+<!-- FUNCIONALIDAD -->
+[![Multi-Fuel](https://img.shields.io/badge/Multi--Fuel-✅-brightgreen)]()
+[![Turn History](https://img.shields.io/badge/Turn%20History-Cloud%20Storage-blue)]()
+[![Admin Panel](https://img.shields.io/badge/Admin%20Panel-Yes-blue)]()
 
 <!-- DISEÑO Y ACCESIBILIDAD -->
 [![Responsive](https://img.shields.io/badge/Responsive-Yes-brightgreen)](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
@@ -48,6 +64,29 @@
 [![GitHub Pages](https://img.shields.io/badge/Hosting-GitHub%20Pages-blue)](https://pages.github.com/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
+<!-- SEGURIDAD -->
+[![HTTPS](https://img.shields.io/badge/HTTPS-Yes-brightgreen)](https://psbella.github.io/cierre_servi/)
+[![Secure](https://img.shields.io/badge/Secure-Yes-brightgreen)](https://psbella.github.io/cierre_servi/)
+[![Data Encryption](https://img.shields.io/badge/Data%20Encryption-Yes-brightgreen)]()
+[![RLS](https://img.shields.io/badge/RLS-Enabled-brightgreen)]()
+
+<!-- CÓDIGO -->
+[![Code Size](https://img.shields.io/badge/Code%20Size-~50KB-blueviolet)](https://github.com/psbella/cierre_servi)
+
+<!-- NAVEGADORES -->
+[![Chrome](https://img.shields.io/badge/Chrome-✓-brightgreen)](https://www.google.com/chrome/)
+[![Firefox](https://img.shields.io/badge/Firefox-✓-brightgreen)](https://www.mozilla.org/firefox/)
+[![Safari](https://img.shields.io/badge/Safari-✓-brightgreen)](https://www.apple.com/safari/)
+[![Edge](https://img.shields.io/badge/Edge-✓-brightgreen)](https://www.microsoft.com/edge)
+
+<!-- PLATAFORMAS -->
+[![Android](https://img.shields.io/badge/Android-✓-brightgreen)](https://www.android.com/)
+[![iOS](https://img.shields.io/badge/iOS-✓-brightgreen)](https://www.apple.com/ios/)
+
+<!-- CALIDAD ADICIONAL -->
+[![CodeQL](https://img.shields.io/badge/CodeQL-Passed-brightgreen)](https://github.com/features/security)
+[![Vulnerabilities](https://img.shields.io/badge/Vulnerabilities-None-brightgreen)]()
+
 <!-- MÉTRICAS Y CALIDAD -->
 [![Performance](https://img.shields.io/badge/Performance-96%25-brightgreen?logo=lighthouse&logoColor=white)]()
 [![Accessibility](https://img.shields.io/badge/Accessibility-93%25-brightgreen?logo=lighthouse&logoColor=white)]()
@@ -55,27 +94,6 @@
 [![SEO](https://img.shields.io/badge/SEO-100%25-brightgreen?logo=lighthouse&logoColor=white)]()
 [![PWA](https://img.shields.io/badge/PWA-100%25-brightgreen?logo=lighthouse&logoColor=white)]()
 [![Passed](https://img.shields.io/badge/Lighthouse-Passed-brightgreen?logo=lighthouse&logoColor=white)]()
-
-<!-- Seguridad -->
-[![HTTPS](https://img.shields.io/badge/HTTPS-Yes-brightgreen)](https://psbella.github.io/cierre_remis/)
-[![Secure](https://img.shields.io/badge/Secure-Yes-brightgreen)](https://psbella.github.io/cierre_remis/)
-
-<!-- Código -->
-[![Code Size](https://img.shields.io/badge/Code%20Size-~50KB-blueviolet)](https://github.com/psbella/cierre_remis)
-
-<!-- Navegadores -->
-[![Chrome](https://img.shields.io/badge/Chrome-✓-brightgreen)](https://www.google.com/chrome/)
-[![Firefox](https://img.shields.io/badge/Firefox-✓-brightgreen)](https://www.mozilla.org/firefox/)
-[![Safari](https://img.shields.io/badge/Safari-✓-brightgreen)](https://www.apple.com/safari/)
-[![Edge](https://img.shields.io/badge/Edge-✓-brightgreen)](https://www.microsoft.com/edge)
-
-<!-- Plataformas -->
-[![Android](https://img.shields.io/badge/Android-✓-brightgreen)](https://www.android.com/)
-[![iOS](https://img.shields.io/badge/iOS-✓-brightgreen)](https://www.apple.com/ios/)
-
-<!-- Calidad adicional -->
-[![CodeQL](https://img.shields.io/badge/CodeQL-Passed-brightgreen)](https://github.com/features/security)
-[![Vulnerabilities](https://img.shields.io/badge/Vulnerabilities-None-brightgreen)]()
 
 ---
 
