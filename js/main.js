@@ -25,13 +25,6 @@ function calcularTotalCombustible() {
     }
 }
 
-    // Disparar evento para actualizar cálculos principales
-    if (combustiblePrincipal) {
-        const event = new Event('input', { bubbles: true });
-        combustiblePrincipal.dispatchEvent(event);
-    }
-}
-
 function agregarCampoCombustible() {
     const index = inputsCombustible.length;
     const div = document.createElement('div');
