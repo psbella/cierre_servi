@@ -32,8 +32,9 @@
     <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const SUPABASE_URL = 'https://TU_PROYECTO.supabase.co';
-        const SUPABASE_ANON_KEY = 'TU_ANON_KEY';
+        // ⚠️ REEMPLAZÁ ESTOS VALORES CON LOS TUYOS DE SUPABASE ⚠️
+        const SUPABASE_URL = 'https://mopcrhgogioawaaqpfnp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vcGNyaGdvZ2lvYXdhYXFwZm5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4ODYzMTMsImV4cCI6MjA5NDQ2MjMxM30.mTRGJRbE6PudvgSS_J8l14AxUa_ti0i0kzltgpMlQU4';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
 </head>
@@ -183,14 +184,13 @@
                 <button id="guardarTurnoBtn" style="background: #27ae60;" aria-label="Guardar turno">💾 GUARDAR</button>
             </div>
 
-            <!-- MODAL LOGIN (flotante) -->
+            <!-- MODAL LOGIN -->
             <div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
                 <div style="background: white; max-width: 400px; width: 90%; border-radius: 16px; padding: 20px; margin: auto;">
                     <div style="display: flex; justify-content: space-between;">
                         <h3>Ingresar</h3>
-                        <button id="closeModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                        <button id="closeModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
                     </div>
-                    
                     <div class="campo">
                         <label for="loginEmail">Email</label>
                         <input type="email" id="loginEmail">
@@ -199,7 +199,7 @@
                         <label for="loginPassword">Contraseña</label>
                         <input type="password" id="loginPassword">
                     </div>
-                    <button id="btnLoginModal" style="margin-bottom: 10px;">Ingresar</button>
+                    <button id="btnLoginModal">Ingresar</button>
                     <p style="text-align: center;">
                         <a href="#" id="showRegisterLink">¿No tenés cuenta? Registrate</a>
                     </p>
@@ -211,9 +211,8 @@
                 <div style="background: white; max-width: 400px; width: 90%; border-radius: 16px; padding: 20px; margin: auto;">
                     <div style="display: flex; justify-content: space-between;">
                         <h3>Registrarse</h3>
-                        <button id="closeRegisterModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                        <button id="closeRegisterModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
                     </div>
-                    
                     <div class="campo">
                         <label for="regNombre">Nombre completo</label>
                         <input type="text" id="regNombre">
