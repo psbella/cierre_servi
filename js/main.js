@@ -23,8 +23,10 @@ function calcularTotalCombustible() {
     if (totalCombustibleDiv) {
         totalCombustibleDiv.innerHTML = `<strong>Total combustible: $${total.toLocaleString('es-AR')}</strong>`;
     }
+    // Disparar evento para actualizar cálculos principales
     if (combustiblePrincipal) {
-        combustiblePrincipal.dispatchEvent(new Event('input', { bubbles: true }));
+        const event = new Event('input', { bubbles: true });
+        combustiblePrincipal.dispatchEvent(event);
     }
 }
 
@@ -215,12 +217,10 @@ async function verificarSesion() {
     const userLegajoSpan = document.getElementById('userLegajoDisplay');
     
     if (user && !error) {
-        usuarioActual = user;
-        const { perfil } = await obtenerPerfil(user.id);
         if (btnLogin) btnLogin.style.display = 'none';
         if (userInfo) userInfo.style.display = 'block';
-        if (userNameSpan) userNameSpan.textContent = perfil?.nombre || user.email;
-        if (userLegajoSpan) userLegajoSpan.textContent = `Legajo: ${perfil?.legajo || 'N/A'}`;
+        if (userNameSpan) userNameSpan.textContent = user.email;
+        if (userLegajoSpan) userLegajoSpan.textContent = `ID: ${user.id.slice(0,8)}...`;
         
         const { data } = await cargarHistorialDesdeSupabase();
         if (data?.length) mostrarHistorial(data);
