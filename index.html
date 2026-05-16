@@ -29,10 +29,9 @@
     <!-- Librerias externas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
-    <!-- Supabase SDK -->
+    <!-- Supabase SDK (SOLO UNA VEZ) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // ⚠️ REEMPLAZÁ ESTOS VALORES CON LOS TUYOS DE SUPABASE ⚠️
         const SUPABASE_URL = 'https://mopcrhgogioawaaqpfnp.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vcGNyaGdvZ2lvYXdhYXFwZm5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4ODYzMTMsImV4cCI6MjA5NDQ2MjMxM30.mTRGJRbE6PudvgSS_J8l14AxUa_ti0i0kzltgpMlQU4';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -191,15 +190,17 @@
                         <h3>Ingresar</h3>
                         <button id="closeModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
                     </div>
-                    <div class="campo">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail">
-                    </div>
-                    <div class="campo">
-                        <label for="loginPassword">Contraseña</label>
-                        <input type="password" id="loginPassword">
-                    </div>
-                    <button id="btnLoginModal">Ingresar</button>
+                    <form id="loginForm">
+                        <div class="campo">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="campo">
+                            <label for="loginPassword">Contraseña</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" id="btnLoginModal">Ingresar</button>
+                    </form>
                     <p style="text-align: center;">
                         <a href="#" id="showRegisterLink">¿No tenés cuenta? Registrate</a>
                     </p>
@@ -213,23 +214,25 @@
                         <h3>Registrarse</h3>
                         <button id="closeRegisterModalBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
                     </div>
-                    <div class="campo">
-                        <label for="regNombre">Nombre completo</label>
-                        <input type="text" id="regNombre">
-                    </div>
-                    <div class="campo">
-                        <label for="regEmail">Email</label>
-                        <input type="email" id="regEmail">
-                    </div>
-                    <div class="campo">
-                        <label for="regPassword">Contraseña</label>
-                        <input type="password" id="regPassword">
-                    </div>
-                    <div class="campo">
-                        <label for="regLegajo">Legajo</label>
-                        <input type="text" id="regLegajo" placeholder="Ej: 1001">
-                    </div>
-                    <button id="btnRegisterModal">Registrarse</button>
+                    <form id="registerForm">
+                        <div class="campo">
+                            <label for="regNombre">Nombre completo</label>
+                            <input type="text" id="regNombre" required>
+                        </div>
+                        <div class="campo">
+                            <label for="regEmail">Email</label>
+                            <input type="email" id="regEmail" required>
+                        </div>
+                        <div class="campo">
+                            <label for="regPassword">Contraseña</label>
+                            <input type="password" id="regPassword" required>
+                        </div>
+                        <div class="campo">
+                            <label for="regLegajo">Legajo</label>
+                            <input type="text" id="regLegajo" placeholder="Ej: 1001" required>
+                        </div>
+                        <button type="submit" id="btnRegisterModal">Registrarse</button>
+                    </form>
                 </div>
             </div>
 
@@ -257,7 +260,7 @@
         </div>
     </main>
 
-    <!-- Scripts -->
+    <!-- Scripts modulares (después de definir supabase) -->
     <script src="js/utils.js"></script>
     <script src="js/calculations.js"></script>
     <script src="js/pdf.js"></script>
@@ -266,4 +269,4 @@
     <script src="js/main.js"></script>
 
 </body>
-    </html>
+</html>
