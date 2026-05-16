@@ -2,6 +2,46 @@
 /* LOGICA PRINCIPAL - SERVI v2                   */
 /* ============================================= */
 
+// Verificar sesión al cargar
+async function verificarSesion() {
+    const { user } = await obtenerUsuarioActual();
+    if (user) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('appScreen').style.display = 'block';
+        const { perfil } = await obtenerPerfil(user.id);
+        if (perfil) {
+            document.getElementById('userName').textContent = perfil.nombre;
+            document.getElementById('userLegajo').textContent = `Legajo: ${perfil.legajo}`;
+        }
+        cargarHistorialDesdeSupabase().then(({ data }) => {
+            if (data) mostrarHistorial(data);
+        });
+    } else {
+        document.getElementById('loginScreen').style.display = 'block';
+        document.getElementById('appScreen').style.display = 'none';
+    }
+}
+
+// Mostrar historial
+function mostrarHistorial(turnos) {
+    const container = document.getElementById('historialContainer');
+    if (!container) return;
+    
+    if (!turnos || turnos.length === 0) {
+        container.innerHTML = '<p>No hay turnos guardados</p>';
+        return;
+    }
+    
+    container.innerHTML = turnos.map(t => `
+        <div class="historial-item">
+            <strong>${t.fecha}</strong><br>
+            Total Reloj: $${t.total_reloj?.toLocaleString() || 0}<br>
+            Titular: $${t.total_titular?.toLocaleString() || 0}<br>
+            Chofer: $${t.total_chofer?.toLocaleString() || 0}
+        </div>
+    `).join('');
+}
+
 // Limpiar campo fecha al cargar
 const fechaInput = document.getElementById('fecha');
 if (fechaInput) fechaInput.value = '';
