@@ -3,52 +3,97 @@
 /* ============================================= */
 
 // Limpiar campo fecha al cargar
-document.getElementById('fecha').value = '';
+const fechaInput = document.getElementById('fecha');
+if (fechaInput) fechaInput.value = '';
 
-// Array para almacenar las cargas de combustible
-let cargasCombustible = [];
-
-// Elementos del DOM para combustible
-const combustibleInput = document.getElementById('combustible');
-const listaCargasDiv = document.getElementById('listaCargasCombustible');
+// Elementos del DOM para combustible dinámico
+const combustiblePrincipal = document.getElementById('combustiblePrincipal');
+const containerCombustible = document.getElementById('combustibleContainer');
 const totalCombustibleDiv = document.getElementById('totalCombustible');
 
-// Función para actualizar la lista y el total de combustible
-function actualizarListaCombustible() {
-    if (cargasCombustible.length === 0) {
-        listaCargasDiv.innerHTML = '<span style="color: #999;">Sin cargas registradas</span>';
-        totalCombustibleDiv.innerHTML = '';
-    } else {
-        listaCargasDiv.innerHTML = cargasCombustible.map((carga, index) => 
-            `<div style="display: flex; justify-content: space-between; padding: 2px 0;">
-                <span>Carga ${index + 1}:</span>
-                <span>$${carga.toLocaleString('es-AR')}</span>
-             </div>`
-        ).join('');
-        
-        const total = cargasCombustible.reduce((a, b) => a + b, 0);
+// Array para guardar los inputs extras
+let inputsCombustible = [];
+
+// Función para calcular el total de combustible
+function calcularTotalCombustible() {
+    let total = parseFloat(combustiblePrincipal?.value) || 0;
+    inputsCombustible.forEach(input => {
+        total += parseFloat(input.value) || 0;
+    });
+    if (totalCombustibleDiv) {
         totalCombustibleDiv.innerHTML = `<strong>Total combustible: $${total.toLocaleString('es-AR')}</strong>`;
-        
-        // Actualizar el input con el total
-        combustibleInput.value = total;
-        combustibleInput.dispatchEvent(new Event('input'));
+    }
+    
+    // Disparar evento para actualizar cálculos
+    if (combustiblePrincipal) {
+        combustiblePrincipal.dispatchEvent(new Event('input', { bubbles: true }));
     }
 }
 
-// Botón para agregar carga de combustible
-const btnCombustible = document.getElementById('btnAgregarCombustible');
-if (btnCombustible) {
-    btnCombustible.addEventListener('click', () => {
-        const nuevoValor = prompt('Ingrese el monto de la carga de combustible:', '0');
-        if (nuevoValor !== null) {
-            const adicional = parseFloat(nuevoValor) || 0;
-            if (adicional > 0) {
-                cargasCombustible.push(adicional);
-                actualizarListaCombustible();
-            } else {
-                alert('Ingrese un monto válido mayor a 0');
-            }
-        }
+// Función para crear un nuevo campo de combustible
+function agregarCampoCombustible() {
+    const index = inputsCombustible.length;
+    const div = document.createElement('div');
+    div.style.display = 'flex';
+    div.style.gap = '8px';
+    div.style.marginBottom = '8px';
+    div.style.alignItems = 'center';
+    
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = `Carga ${index + 1}`;
+    input.inputMode = 'numeric';
+    input.pattern = '[0-9]*';
+    input.ariaLabel = `Carga de combustible ${index + 1}`;
+    input.style.flex = '1';
+    input.style.padding = '8px 12px';
+    input.style.border = '1px solid #ccc';
+    input.style.borderRadius = '8px';
+    
+    const btnEliminar = document.createElement('button');
+    btnEliminar.textContent = '✕';
+    btnEliminar.style.width = '32px';
+    btnEliminar.style.background = '#e74c3c';
+    btnEliminar.style.color = 'white';
+    btnEliminar.style.border = 'none';
+    btnEliminar.style.borderRadius = '8px';
+    btnEliminar.style.cursor = 'pointer';
+    
+    btnEliminar.addEventListener('click', () => {
+        div.remove();
+        const pos = inputsCombustible.indexOf(input);
+        if (pos !== -1) inputsCombustible.splice(pos, 1);
+        calcularTotalCombustible();
+        // Reordenar placeholders
+        inputsCombustible.forEach((inp, i) => {
+            inp.placeholder = `Carga ${i + 1}`;
+        });
+    });
+    
+    input.addEventListener('input', () => {
+        calcularTotalCombustible();
+    });
+    
+    div.appendChild(input);
+    div.appendChild(btnEliminar);
+    if (containerCombustible) containerCombustible.appendChild(div);
+    inputsCombustible.push(input);
+    
+    calcularTotalCombustible();
+}
+
+// Botón para agregar campo
+const btnAgregar = document.getElementById('btnAgregarCombustible');
+if (btnAgregar) {
+    btnAgregar.addEventListener('click', () => {
+        agregarCampoCombustible();
+    });
+}
+
+// Escuchar cambios en el campo principal
+if (combustiblePrincipal) {
+    combustiblePrincipal.addEventListener('input', () => {
+        calcularTotalCombustible();
     });
 }
 
@@ -58,32 +103,34 @@ function actualizarPantalla() {
     const detalle = obtenerElementosDetalle();
     
     // Actualizar resultados principales
-    elementos.totalTitular.textContent = formatearPesos(r.totalTitular);
-    elementos.totalChofer.textContent = formatearPesos(r.totalChofer);
-    elementos.promedioViaje.textContent = formatearPesos(r.promedioViaje);
-    elementos.promedioKm.textContent = formatearPesos(r.promedioKm);
+    if (elementos.totalTitular) elementos.totalTitular.textContent = formatearPesos(r.totalTitular);
+    if (elementos.totalChofer) elementos.totalChofer.textContent = formatearPesos(r.totalChofer);
+    if (elementos.promedioViaje) elementos.promedioViaje.textContent = formatearPesos(r.promedioViaje);
+    if (elementos.promedioKm) elementos.promedioKm.textContent = formatearPesos(r.promedioKm);
     
     // Actualizar detalle TITULAR
-    detalle.detTotal.textContent = formatearPesos(r.totalRecaudacion);
-    detalle.detCombustible.textContent = formatearPesos(r.combustible);
-    detalle.detSubtotal1.textContent = formatearPesos(r.subtotal);
-    detalle.det50.textContent = formatearPesos(r.base50);
-    detalle.detFrecuencia.textContent = formatearPesos(r.frecuencia);
-    detalle.detSubtotal2.textContent = formatearPesos(r.subTotal);
-    detalle.detTarjeta.textContent = formatearPesos(r.tarjetaQr);
-    detalle.detVoucher.textContent = formatearPesos(r.voucher);
-    detalle.detToken.textContent = formatearPesos(r.firmaTicket);
-    detalle.detCtaCte.textContent = formatearPesos(r.cuentaCorriente);
-    detalle.detGastos.textContent = formatearPesos(r.gastos);
-    detalle.detTotalTitular.textContent = formatearPesos(r.totalTitular);
+    if (detalle.detTotal) detalle.detTotal.textContent = formatearPesos(r.totalRecaudacion);
+    if (detalle.detCombustible) detalle.detCombustible.textContent = formatearPesos(r.combustible);
+    if (detalle.detSubtotal1) detalle.detSubtotal1.textContent = formatearPesos(r.subtotal);
+    if (detalle.det50) detalle.det50.textContent = formatearPesos(r.base50);
+    if (detalle.detFrecuencia) detalle.detFrecuencia.textContent = formatearPesos(r.frecuencia);
+    if (detalle.detSubtotal2) detalle.detSubtotal2.textContent = formatearPesos(r.subTotal);
+    if (detalle.detTarjeta) detalle.detTarjeta.textContent = formatearPesos(r.tarjetaQr);
+    if (detalle.detVoucher) detalle.detVoucher.textContent = formatearPesos(r.voucher);
+    if (detalle.detToken) detalle.detToken.textContent = formatearPesos(r.firmaTicket);
+    if (detalle.detCtaCte) detalle.detCtaCte.textContent = formatearPesos(r.cuentaCorriente);
+    if (detalle.detGastos) detalle.detGastos.textContent = formatearPesos(r.gastos);
+    if (detalle.detTotalTitular) detalle.detTotalTitular.textContent = formatearPesos(r.totalTitular);
     
     // Actualizar detalle CHOFER
-    detalle.detChoferBase.textContent = formatearPesos(r.base50);
-    detalle.detChoferFrecuencia.textContent = formatearPesos(r.frecuencia);
-    detalle.detTotalChofer.textContent = formatearPesos(r.totalChofer);
+    if (detalle.detChoferBase) detalle.detChoferBase.textContent = formatearPesos(r.base50);
+    if (detalle.detChoferFrecuencia) detalle.detChoferFrecuencia.textContent = formatearPesos(r.frecuencia);
+    if (detalle.detTotalChofer) detalle.detTotalChofer.textContent = formatearPesos(r.totalChofer);
     
     // Mostrar operacion completa
-    detalle.detOperacion.innerHTML = `TITULAR: Total Reloj ${formatearPesos(r.totalReloj)} - Relevo ${formatearPesos(r.relevo)} = ${formatearPesos(r.totalRecaudacion)} - Combustible ${formatearPesos(r.combustible)} = ${formatearPesos(r.subtotal)} / 2 = ${formatearPesos(r.base50)} + Frecuencia ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.subTotal)} - (Tarjeta/QR ${formatearPesos(r.tarjetaQr)} + Voucher ${formatearPesos(r.voucher)} + Firma Ticket ${formatearPesos(r.firmaTicket)} + Cta Cte ${formatearPesos(r.cuentaCorriente)} + Gastos ${formatearPesos(r.gastos)}) = ${formatearPesos(r.totalTitular)}<br><br>CHOFER: ${formatearPesos(r.base50)} - Frecuencia ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.totalChofer)}`;
+    if (detalle.detOperacion) {
+        detalle.detOperacion.innerHTML = `TITULAR: Total Reloj ${formatearPesos(r.totalReloj)} - Relevo ${formatearPesos(r.relevo)} = ${formatearPesos(r.totalRecaudacion)} - Combustible ${formatearPesos(r.combustible)} = ${formatearPesos(r.subtotal)} / 2 = ${formatearPesos(r.base50)} + Frecuencia ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.subTotal)} - (Tarjeta/QR ${formatearPesos(r.tarjetaQr)} + Voucher ${formatearPesos(r.voucher)} + Firma Ticket ${formatearPesos(r.firmaTicket)} + Cta Cte ${formatearPesos(r.cuentaCorriente)} + Gastos ${formatearPesos(r.gastos)}) = ${formatearPesos(r.totalTitular)}<br><br>CHOFER: ${formatearPesos(r.base50)} - Frecuencia ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.totalChofer)}`;
+    }
 }
 
 // Navegacion con Enter (PC)
@@ -104,9 +151,13 @@ function setupEnterNavigation() {
 }
 
 // Eventos de los botones
-document.getElementById('exportarPDF').addEventListener('click', exportarPDF);
-document.getElementById('enviarWhatsapp').addEventListener('click', enviarWhatsapp);
-document.getElementById('enviarEmail').addEventListener('click', enviarEmail);
+const btnPDF = document.getElementById('exportarPDF');
+const btnWhatsapp = document.getElementById('enviarWhatsapp');
+const btnEmail = document.getElementById('enviarEmail');
+
+if (btnPDF) btnPDF.addEventListener('click', exportarPDF);
+if (btnWhatsapp) btnWhatsapp.addEventListener('click', enviarWhatsapp);
+if (btnEmail) btnEmail.addEventListener('click', enviarEmail);
 
 // Activar navegacion con Enter
 setupEnterNavigation();
@@ -118,7 +169,7 @@ todosLosCampos.forEach(campo => {
 });
 
 // Inicializar lista de combustible
-actualizarListaCombustible();
+calcularTotalCombustible();
 
 // Inicializar
 actualizarPantalla();
