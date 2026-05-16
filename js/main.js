@@ -23,6 +23,13 @@ function calcularTotalCombustible() {
     if (totalCombustibleDiv) {
         totalCombustibleDiv.innerHTML = `<strong>Total combustible: $${total.toLocaleString('es-AR')}</strong>`;
     }
+    // ✅ Elimina las siguientes líneas para romper el bucle
+    // if (combustiblePrincipal) {
+    //     const event = new Event('input', { bubbles: true });
+    //     combustiblePrincipal.dispatchEvent(event);
+    // }
+}
+    }
     // Disparar evento para actualizar cálculos principales
     if (combustiblePrincipal) {
         const event = new Event('input', { bubbles: true });
