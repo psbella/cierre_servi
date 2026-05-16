@@ -14,9 +14,8 @@ async function registrarUsuario(email, password, nombre, legajo) {
             }
         }
     });
-    
+
     if (!error && data.user) {
-        // Crear perfil en la tabla perfiles
         await supabase.from('perfiles').insert([{
             id: data.user.id,
             email: email,
@@ -25,7 +24,7 @@ async function registrarUsuario(email, password, nombre, legajo) {
             rol: 'chofer'
         }]);
     }
-    
+
     return { data, error };
 }
 
@@ -64,7 +63,7 @@ async function obtenerPerfil(userId) {
 async function guardarTurnoEnSupabase(turno) {
     const { user } = await obtenerUsuarioActual();
     if (!user) return { error: 'No hay usuario logueado' };
-    
+
     const { data, error } = await supabase
         .from('turnos')
         .insert([{
@@ -83,7 +82,7 @@ async function guardarTurnoEnSupabase(turno) {
             total_chofer: turno.totalChofer,
             notas: turno.notas
         }]);
-    
+
     return { data, error };
 }
 
@@ -91,16 +90,16 @@ async function guardarTurnoEnSupabase(turno) {
 async function cargarHistorialDesdeSupabase() {
     const { user } = await obtenerUsuarioActual();
     if (!user) return { data: null, error: 'No hay usuario logueado' };
-    
+
     const { perfil } = await obtenerPerfil(user.id);
     const esAdmin = perfil?.rol === 'admin';
-    
+
     let query = supabase.from('turnos').select('*');
-    
+
     if (!esAdmin) {
         query = query.eq('usuario_id', user.id);
     }
-    
+
     const { data, error } = await query.order('fecha', { ascending: false });
     return { data, error };
 }
@@ -119,4 +118,4 @@ async function actualizarContrasenia(nuevaPassword) {
         password: nuevaPassword
     });
     return { data, error };
-      }
+}
