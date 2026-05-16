@@ -1,0 +1,475 @@
+/* ============================================= */
+/* ESTILOS GENERALES - SERVI                     */
+/* ============================================= */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #e8e8e8;
+    padding: 20px;
+}
+
+.container {
+    max-width: 650px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.subtitulo {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* ============================================= */
+/* ACCESIBILIDAD                                 */
+/* ============================================= */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #0066B3;
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 8px 0;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Focus visible para navegación por teclado */
+*:focus {
+    outline: 3px solid #0066B3;
+    outline-offset: 3px;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+    outline: 3px solid #0066B3;
+    outline-offset: 2px;
+}
+
+/* ============================================= */
+/* SECCIONES                                     */
+/* ============================================= */
+
+.seccion {
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 16px;
+}
+
+.seccion h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    border-left: 4px solid #0066B3;
+    padding-left: 10px;
+}
+
+/* ============================================= */
+/* CAMPOS DE ENTRADA                             */
+/* ============================================= */
+
+.campo {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.8rem;
+    color: #2c3e50;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Placeholder accesible */
+::placeholder            { color: #666; opacity: 1; }
+:-ms-input-placeholder   { color: #666; }
+::-ms-input-placeholder  { color: #666; }
+
+.fila-2 {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.fila-2 .campo {
+    flex: 1;
+}
+
+/* ============================================= */
+/* BOTÓN LOGIN (HEADER)                          */
+/* ============================================= */
+
+.btn-login {
+    background: #0066B3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-login:hover {
+    background: #005A9C;
+}
+
+/* ============================================= */
+/* RESULTADOS                                    */
+/* ============================================= */
+
+.resultados {
+    margin-top: 20px;
+    background: #ecf0f1;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.resultado-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 1rem;
+}
+
+.resultado-item:first-child {
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.titular {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.chofer {
+    color: #2980b9;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.total-numero {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.estadistica {
+    background: #fff8e1;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+.estadistica-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 0.8rem;
+}
+
+/* ============================================= */
+/* BOTONERA                                      */
+/* ============================================= */
+
+.botonera {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0 16px;
+}
+
+.botonera button {
+    flex: 1;
+    padding: 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    background: #0066B3;
+    color: white;
+    font-family: inherit;
+}
+
+.botonera button:hover {
+    background: #005A9C;
+}
+
+.botonera button:active {
+    transform: scale(0.98);
+    background: #004F8A;
+}
+
+/* ============================================= */
+/* FOOTER                                        */
+/* ============================================= */
+
+.footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 0.65rem;
+    color: #2c3e50;
+    border-top: 1px solid #ecf0f1;
+}
+
+.footer a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #0066B3;
+    text-decoration: underline;
+}
+
+.code-symbol {
+    color: #0066B3;
+    font-weight: 600;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 15px 0;
+}
+
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #7f8c8d;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #0066B3;
+    text-decoration: underline;
+}
+
+.footer-copyright {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #95a5a6;
+    font-size: 12px;
+}
+
+/* ============================================= */
+/* HEADER ROW                                    */
+/* ============================================= */
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-row h1 {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+#userInfo {
+    text-align: right;
+}
+
+.btn-logout {
+    background: none;
+    color: #e74c3c;
+    border: none;
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 2px 0;
+}
+
+/* ============================================= */
+/* COMBUSTIBLE                                   */
+/* ============================================= */
+
+.combustible-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.btn-add {
+    width: 40px;
+    flex-shrink: 0;
+    background: #0066B3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-add:hover {
+    background: #005A9C;
+}
+
+.total-combustible {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #0066B3;
+}
+
+/* ============================================= */
+/* MODALES                                       */
+/* ============================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;           /* visible when not [hidden] */
+    justify-content: center;
+    align-items: center;
+}
+
+/* HTML [hidden] overrides display — need to restore flex when shown via JS */
+.modal[hidden] {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    max-width: 400px;
+    width: 90%;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    color: #666;
+}
+
+.btn-close:hover {
+    color: #333;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #0066B3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 8px;
+}
+
+.btn-submit:hover {
+    background: #005A9C;
+}
+
+.modal-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.85rem;
+}
+
+/* ============================================= */
+/* HISTORIAL                                     */
+/* ============================================= */
+
+.historial {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+}
+
+/* ============================================= */
+/* RESPONSIVE                                    */
+/* ============================================= */
+
+@media (max-width: 500px) {
+    .container {
+        padding: 16px;
+    }
+
+    .total-numero {
+        font-size: 1rem;
+    }
+
+    .botonera {
+        flex-direction: column;
+    }
+}

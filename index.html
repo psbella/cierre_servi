@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <title>Cierre de Turno - Servi</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Aplicación para liquidación de cierre de turno de remises y taxis.">
+    <meta name="author" content="Pablo Bella">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0066B3">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CierreTurno">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"  href="assets/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <main id="main-content">
+        <div class="container">
+
+            <h1>CIERRE DE TURNO - SERVI</h1>
+            <div class="subtitulo">Liquidación para chofer y titular</div>
+
+            <!-- DATOS DEL TURNO -->
+            <div class="seccion">
+                <h3>DATOS DEL TURNO</h3>
+                <div class="fila-2">
+                    <div class="campo">
+                        <label for="fecha">Fecha</label>
+                        <input type="date" id="fecha">
+                    </div>
+                    <div class="campo">
+                        <label for="licencia">Licencia</label>
+                        <input type="text" id="licencia" inputmode="numeric" pattern="[0-9]*" aria-label="Número de licencia">
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="choferNombre">Chofer</label>
+                    <input type="text" id="choferNombre" aria-label="Nombre del chofer">
+                </div>
+            </div>
+
+            <!-- MOVIMIENTOS DEL TURNO -->
+            <div class="seccion">
+                <h3>MOVIMIENTOS DEL TURNO</h3>
+
+                <div class="campo">
+                    <label for="totalReloj">Total Reloj</label>
+                    <input type="text" id="totalReloj" inputmode="numeric" pattern="[0-9]*" aria-label="Total del reloj">
+                </div>
+
+                <div class="campo">
+                    <label for="relevo">Relevo</label>
+                    <input type="text" id="relevo" inputmode="numeric" pattern="[0-9]*" aria-label="Monto por relevo">
+                </div>
+
+                <div class="fila-2">
+                    <div class="campo">
+                        <label for="viajes">Cantidad de viajes</label>
+                        <input type="text" id="viajes" inputmode="numeric" pattern="[0-9]*" aria-label="Cantidad de viajes">
+                    </div>
+                    <div class="campo">
+                        <label for="kilometros">Kilómetros recorridos</label>
+                        <input type="text" id="kilometros" inputmode="numeric" pattern="[0-9]*" aria-label="Kilómetros recorridos">
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label>Combustible</label>
+                    <div class="combustible-row">
+                        <input type="text" id="combustiblePrincipal" placeholder="Monto" inputmode="numeric" pattern="[0-9]*">
+                        <button type="button" id="btnAgregarCombustible" class="btn-add" aria-label="Agregar carga de combustible">+</button>
+                    </div>
+                    <div id="combustibleContainer"></div>
+                    <div id="totalCombustible" class="total-combustible"></div>
+                </div>
+
+                <div class="fila-2">
+                    <div class="campo">
+                        <label for="frecuencia">Frecuencia</label>
+                        <input type="text" id="frecuencia" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="campo">
+                        <label for="tarjeta_qr">Tarjeta / QR</label>
+                        <input type="text" id="tarjeta_qr" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                </div>
+
+                <div class="fila-2">
+                    <div class="campo">
+                        <label for="voucher">Voucher</label>
+                        <input type="text" id="voucher" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="campo">
+                        <label for="firmaTicket">Firma Ticket</label>
+                        <input type="text" id="firmaTicket" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                </div>
+
+                <div class="fila-2">
+                    <div class="campo">
+                        <label for="cuenta_corriente">Cuenta Corriente</label>
+                        <input type="text" id="cuenta_corriente" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <div class="campo">
+                        <label for="gastos">Gastos</label>
+                        <input type="text" id="gastos" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="notas">Notas u observaciones</label>
+                    <textarea id="notas"></textarea>
+                </div>
+            </div>
+
+            <!-- RESULTADOS -->
+            <div class="resultados" aria-live="polite">
+                <div class="resultado-item">
+                    <strong class="titular">TITULAR</strong>
+                    <span class="total-numero titular" id="totalTitular">$ 0</span>
+                </div>
+                <div class="resultado-item">
+                    <strong class="chofer">CHOFER</strong>
+                    <span class="total-numero chofer" id="totalChofer">$ 0</span>
+                </div>
+                <div class="estadistica">
+                    <div class="estadistica-item">
+                        <span>Promedio por viaje</span>
+                        <strong id="promedioViaje">$ 0</strong>
+                    </div>
+                    <div class="estadistica-item">
+                        <span>Promedio por kilómetro</span>
+                        <strong id="promedioKm">$ 0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONERA -->
+            <div class="botonera">
+                <button id="exportarPDF"    aria-label="Exportar a PDF">PDF</button>
+                <button id="enviarWhatsapp" aria-label="Compartir por WhatsApp">WHATSAPP</button>
+                <button id="enviarEmail"    aria-label="Enviar por email">EMAIL</button>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <p><span class="code-symbol">&lt;/&gt;</span> Desarrollado por <a href="mailto:pablo.s.bella@gmail.com">Pablo Bella</a></p>
+                <div class="footer-links">
+                    <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
+                    <a href="privacidad.html">Política de Privacidad</a>
+                    <a href="terminos.html">Términos y Condiciones</a>
+                    <a href="mailto:pablo.s.bella@gmail.com">Contacto</a>
+                </div>
+                <div class="footer-copyright">
+                    <span>© 2026 - Cierre de Turno Servi</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Scripts (sin Supabase) -->
+    <script src="js/utils.js"></script>
+    <script src="js/calculations.js"></script>
+    <script src="js/pdf.js"></script>
+    <script src="js/share.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
