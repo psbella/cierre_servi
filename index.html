@@ -28,22 +28,6 @@
     
     <!-- Librerias externas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
-        <!-- Supabase SDK y configuración (SOLO UNA VEZ) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const SUPABASE_URL = 'https://mopcrhgogioawaaqpfnp.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vcGNyaGdvZ2lvYXdhYXFwZm5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4ODYzMTMsImV4cCI6MjA5NDQ2MjMxM30.mTRGJRbE6PudvgSS_J8l14AxUa_ti0i0kzltgpMlQU4';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    </script>
-
-    <!-- Scripts modulares -->
-    <script src="js/utils.js"></script>
-    <script src="js/calculations.js"></script>
-    <script src="js/pdf.js"></script>
-    <script src="js/share.js"></script>
-    <script src="js/supabase.js"></script>
-    <script src="js/main.js"></script>
 </head>
 <body>
 
@@ -267,6 +251,18 @@
             </div>
         </div>
     </main>
+
+    <!-- ============================================= -->
+    <!-- TODOS LOS SCRIPTS AL FINAL DEL BODY           -->
+    <!-- ============================================= -->
+    
+    <!-- Supabase SDK y configuración -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://mopcrhgogioawaaqpfnp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vcGNyaGdvZ2lvYXdhYXFwZm5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4ODYzMTMsImV4cCI6MjA5NDQ2MjMxM30.mTRGJRbE6PudvgSS_J8l14AxUa_ti0i0kzltgpMlQU4';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
 
     <!-- Scripts modulares -->
     <script src="js/utils.js"></script>
