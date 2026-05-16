@@ -17,12 +17,12 @@ function actualizarPantalla() {
     elementos.promedioKm.textContent = formatearPesos(r.promedioKm);
     
     // Actualizar detalle TITULAR
-    detalle.detTotal.textContent = formatearPesos(r.recaudacion);
+    detalle.detTotal.textContent = formatearPesos(r.totalRecaudacion);
     detalle.detCombustible.textContent = formatearPesos(r.combustible);
-    detalle.detSubtotal1.textContent = formatearPesos(r.despuesCombustible);
+    detalle.detSubtotal1.textContent = formatearPesos(r.subtotal);
     detalle.det50.textContent = formatearPesos(r.base50);
     detalle.detFrecuencia.textContent = formatearPesos(r.frecuencia);
-    detalle.detSubtotal2.textContent = formatearPesos(r.base50 + r.frecuencia);
+    detalle.detSubtotal2.textContent = formatearPesos(r.subTotal);
     detalle.detTarjeta.textContent = formatearPesos(r.tarjetaQr);
     detalle.detVoucher.textContent = formatearPesos(r.voucher);
     detalle.detToken.textContent = formatearPesos(r.firmaTicket);
@@ -36,7 +36,7 @@ function actualizarPantalla() {
     detalle.detTotalChofer.textContent = formatearPesos(r.totalChofer);
     
     // Mostrar operacion completa
-    detalle.detOperacion.innerHTML = `TITULAR: ${formatearPesos(r.recaudacion)} - ${formatearPesos(r.combustible)} = ${formatearPesos(r.despuesCombustible)} / 2 = ${formatearPesos(r.base50)} + ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.base50 + r.frecuencia)} - (${formatearPesos(r.tarjetaQr)} + ${formatearPesos(r.voucher)} + ${formatearPesos(r.firmaTicket)} + ${formatearPesos(r.cuentaCorriente)} + ${formatearPesos(r.gastos)}) = ${formatearPesos(r.totalTitular)}<br><br>CHOFER: ${formatearPesos(r.base50)} - ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.totalChofer)}`;
+    detalle.detOperacion.innerHTML = `TITULAR: ${formatearPesos(r.totalReloj)} - ${formatearPesos(r.relevo)} = ${formatearPesos(r.totalRecaudacion)} - ${formatearPesos(r.combustible)} = ${formatearPesos(r.subtotal)} / 2 = ${formatearPesos(r.base50)} + ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.subTotal)} - (${formatearPesos(r.tarjetaQr)} + ${formatearPesos(r.voucher)} + ${formatearPesos(r.firmaTicket)} + ${formatearPesos(r.cuentaCorriente)} + ${formatearPesos(r.gastos)}) = ${formatearPesos(r.totalTitular)}<br><br>CHOFER: ${formatearPesos(r.base50)} - ${formatearPesos(r.frecuencia)} = ${formatearPesos(r.totalChofer)}`;
 }
 
 // Navegacion con Enter (PC)
