@@ -155,80 +155,48 @@
             </div>
 
             <!-- DESGLOSE DETALLADO -->
-            <div class="seccion" style="margin-top: 16px;">
-                <h3>DESGLOSE DEL CÁLCULO</h3>
+<div class="seccion" style="margin-top: 16px;">
+    <h3>DESGLOSE DEL CÁLCULO</h3>
 
-                <div class="detalle-content">
-                    <p style="font-size:0.8rem; font-weight:bold; margin-bottom:8px; color:#2c3e50;">TITULAR</p>
-
-                    <div class="detalle-item">
-                        <span>Total recaudación</span>
-                        <strong id="detTotal">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>Combustible</span>
-                        <strong id="detCombustible">$ 0</strong>
-                    </div>
-                    <div class="detalle-item detalle-subtotal">
-                        <span>Subtotal</span>
-                        <strong id="detSubtotal1">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>50%</span>
-                        <strong id="det50">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>+ Frecuencia</span>
-                        <strong id="detFrecuencia">$ 0</strong>
-                    </div>
-                    <div class="detalle-item detalle-subtotal">
-                        <span>Subtotal 2</span>
-                        <strong id="detSubtotal2">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>- Tarjeta / QR</span>
-                        <strong id="detTarjeta">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>- Voucher</span>
-                        <strong id="detVoucher">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>- Firma Ticket</span>
-                        <strong id="detToken">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>- Cuenta Corriente</span>
-                        <strong id="detCtaCte">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>- Gastos</span>
-                        <strong id="detGastos">$ 0</strong>
-                    </div>
-                    <div class="detalle-item detalle-total-titular">
-                        <span>TOTAL TITULAR</span>
-                        <strong id="detTotalTitular">$ 0</strong>
-                    </div>
-
-                    <div class="separador"></div>
-
-                    <p style="font-size:0.8rem; font-weight:bold; margin-bottom:8px; color:#2980b9;">CHOFER</p>
-                    <div class="detalle-item">
-                        <span>Base 50%</span>
-                        <strong id="detChoferBase">$ 0</strong>
-                    </div>
-                    <div class="detalle-item">
-                        <span>- Frecuencia</span>
-                        <strong id="detChoferFrecuencia">$ 0</strong>
-                    </div>
-                    <div class="detalle-item detalle-total-chofer">
-                        <span>TOTAL CHOFER</span>
-                        <strong id="detTotalChofer">$ 0</strong>
-                    </div>
-
-                    <div class="detalle-operacion" id="detOperacion"></div>
-                </div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- TITULAR -->
+        <div style="background: #f9f9f9; border-radius: 12px; padding: 12px;">
+            <div style="font-weight: bold; margin-bottom: 10px; color: #2c3e50; border-left: 3px solid #0066B3; padding-left: 8px;">
+                TITULAR
             </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 12px; font-size: 0.8rem;">
+                <div>Total recaudación:</div><div style="text-align: right;"><strong id="detTotal">$ 0</strong></div>
+                <div>Combustible:</div><div style="text-align: right;"><strong id="detCombustible">$ 0</strong></div>
+                <div style="font-weight: bold; color: #e67e22;">Subtotal:</div><div style="text-align: right;"><strong id="detSubtotal1">$ 0</strong></div>
+                <div>50%:</div><div style="text-align: right;"><strong id="det50">$ 0</strong></div>
+                <div>+ Frecuencia:</div><div style="text-align: right;"><strong id="detFrecuencia">$ 0</strong></div>
+                <div style="font-weight: bold; color: #e67e22;">Subtotal 2:</div><div style="text-align: right;"><strong id="detSubtotal2">$ 0</strong></div>
+                <div>- Tarjeta/QR:</div><div style="text-align: right;"><strong id="detTarjeta">$ 0</strong></div>
+                <div>- Voucher:</div><div style="text-align: right;"><strong id="detVoucher">$ 0</strong></div>
+                <div>- Firma Ticket:</div><div style="text-align: right;"><strong id="detToken">$ 0</strong></div>
+                <div>- Cuenta Corriente:</div><div style="text-align: right;"><strong id="detCtaCte">$ 0</strong></div>
+                <div>- Gastos:</div><div style="text-align: right;"><strong id="detGastos">$ 0</strong></div>
+                <div style="font-weight: bold; margin-top: 4px; border-top: 1px dashed #ccc; padding-top: 4px;">TOTAL TITULAR:</div>
+                <div style="text-align: right; font-weight: bold; color: #0066B3;"><strong id="detTotalTitular">$ 0</strong></div>
+            </div>
+        </div>
+
+        <!-- CHOFER -->
+        <div style="background: #f9f9f9; border-radius: 12px; padding: 12px;">
+            <div style="font-weight: bold; margin-bottom: 10px; color: #2c3e50; border-left: 3px solid #2980b9; padding-left: 8px;">
+                CHOFER
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 12px; font-size: 0.8rem;">
+                <div>Base 50%:</div><div style="text-align: right;"><strong id="detChoferBase">$ 0</strong></div>
+                <div>- Frecuencia:</div><div style="text-align: right;"><strong id="detChoferFrecuencia">$ 0</strong></div>
+                <div style="font-weight: bold; margin-top: 4px; border-top: 1px dashed #ccc; padding-top: 4px;">TOTAL CHOFER:</div>
+                <div style="text-align: right; font-weight: bold; color: #2980b9;"><strong id="detTotalChofer">$ 0</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detalle-operacion" id="detOperacion" style="margin-top: 12px; font-size: 0.7rem; background: #f5f5f5; padding: 8px; border-radius: 8px;"></div>
+</div>
 
             <!-- BOTONERA -->
             <div class="botonera">
