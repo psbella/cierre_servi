@@ -5,7 +5,7 @@
 function generarMensajeTexto() {
     const r = calcularTodo();
     
-    let mensaje = `CIERRE DE TURNO
+    let mensaje = `CIERRE DE TURNO - SERVI v2
 Fecha: ${r.fechaFormateada}
 Chofer: ${r.chofer}
 Licencia: ${r.licencia}
@@ -13,12 +13,14 @@ Licencia: ${r.licencia}
 MOVIMIENTOS:
 Viajes: ${formatearNumero(r.viajes)}
 Kilometros: ${formatearNumero(r.kilometros)}
-Recaudacion: ${formatearPesos(r.recaudacion)}
-Combustible: ${formatearPesos(r.combustible)}
+Total Reloj: ${formatearPesos(r.totalReloj)}
+Relevo: - ${formatearPesos(r.relevo)}
+Total Recaudacion: ${formatearPesos(r.totalRecaudacion)}
+Combustible: - ${formatearPesos(r.combustible)}
 Frecuencia: ${formatearPesos(r.frecuencia)}
 Tarjeta/QR: ${formatearPesos(r.tarjetaQr)}
 Voucher: ${formatearPesos(r.voucher)}
-Ticket: ${formatearPesos(r.firmaTicket)}
+Firma Ticket: ${formatearPesos(r.firmaTicket)}
 Cuenta Corriente: ${formatearPesos(r.cuentaCorriente)}
 Gastos: ${formatearPesos(r.gastos)}
 
