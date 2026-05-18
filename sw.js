@@ -7,10 +7,11 @@ const FILES_TO_CACHE = [
     '/cierre_servi/js/calculations.js',
     '/cierre_servi/js/pdf.js',
     '/cierre_servi/js/share.js',
-    '/cierre_servi/js/supabase.js',
     '/cierre_servi/js/main.js',
     '/cierre_servi/manifest.json',
-    '/cierre_servi/assets/favicon.svg'
+    '/cierre_servi/assets/favicon.svg',
+    '/cierre_servi/assets/favicon-32x32.png',
+    '/cierre_servi/assets/favicon-16x16.png'
 ];
 
 self.addEventListener('install', (event) => {
