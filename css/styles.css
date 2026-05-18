@@ -406,12 +406,11 @@ textarea {
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    display: flex;           /* visible when not [hidden] */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* HTML [hidden] overrides display — need to restore flex when shown via JS */
 .modal[hidden] {
     display: none;
 }
